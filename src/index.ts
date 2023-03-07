@@ -30,10 +30,14 @@ export const leveldbRegistry = <TItem extends Identifiable>({
 
     const remove = async (id: string): Promise<TItem | undefined> => {
         return withLeveldb<TItem>(async (r) => {
-            const found = await r.get(id).then((data) => {
-                if (data) return JSON.parse(data);
-                else return undefined;
-            });
+            const found = await r
+                .get(id)
+                .then((data) => {
+                    return JSON.parse(data);
+                })
+                .catch(() => {
+                    // ignored
+                });
             await r.del(id);
             return found;
         });
@@ -41,11 +45,12 @@ export const leveldbRegistry = <TItem extends Identifiable>({
 
     const fetch = async (id: string): Promise<TItem | undefined> => {
         return withLeveldb<TItem>(async (r) => {
-            try {
-                return await r.get(id).then(JSON.parse);
-            } catch (error) {
-                return undefined;
-            }
+            return await r
+                .get(id)
+                .then(JSON.parse)
+                .catch(() => {
+                    // ignored
+                });
         });
     };
 
