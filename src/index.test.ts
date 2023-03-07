@@ -1,7 +1,8 @@
-import * as path from 'path';
-import { Identifiable, leveldbRegistry } from './index';
-import * as fs from 'fs';
 import { randomUUID } from 'crypto';
+import * as fs from 'fs';
+import * as path from 'path';
+
+import { Identifiable, leveldbRegistry } from './index';
 
 type TestItem = Identifiable & {
     value: string;

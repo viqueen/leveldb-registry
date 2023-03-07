@@ -1,5 +1,6 @@
-import LevelUp from 'levelup';
 import LevelDOWN from 'leveldown';
+import LevelUp from 'levelup';
+
 import type { Filter, Identifiable, Registry } from './types';
 
 export * from './types';
