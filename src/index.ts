@@ -32,9 +32,7 @@ export const leveldbRegistry = <TItem extends Identifiable>({
         return withLeveldb<TItem>(async (r) => {
             const found = await r
                 .get(id)
-                .then((data) => {
-                    return JSON.parse(data);
-                })
+                .then(JSON.parse)
                 .catch(() => {
                     // ignored
                 });
