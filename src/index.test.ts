@@ -1,4 +1,4 @@
-import path from 'path';
+import * as path from 'path';
 import { Identifiable, leveldbRegistry } from './index';
 import * as fs from 'fs';
 import { randomUUID } from 'crypto';
@@ -15,7 +15,7 @@ describe('leveldb-registry', () => {
         fs.rmSync(localPath, { recursive: true });
     });
 
-    it('should add identifiable item to registry', async () => {
+    it('should add and remove identifiable item to registry', async () => {
         const item: TestItem = {
             id: randomUUID(),
             value: randomUUID()
@@ -33,5 +33,12 @@ describe('leveldb-registry', () => {
 
         const items = await registry.list();
         expect(items).toEqual([item]);
+
+        const removed = await registry.remove(item.id);
+        expect(removed).toBeDefined();
+        expect(removed).toEqual(item);
+
+        const empty = await registry.list();
+        expect(empty).toEqual([]);
     });
 });

@@ -27,6 +27,17 @@ export const leveldbRegistry = <TItem extends Identifiable>({
         });
     };
 
+    const remove = async (id: string): Promise<TItem | undefined> => {
+        return withLeveldb<TItem>(async (r) => {
+            const found = await r.get(id).then((data) => {
+                if (data) return JSON.parse(data);
+                else return undefined;
+            });
+            await r.del(id);
+            return found;
+        });
+    };
+
     const fetch = async (id: string): Promise<TItem | undefined> => {
         return withLeveldb<TItem>(async (r) => {
             try {
@@ -55,5 +66,5 @@ export const leveldbRegistry = <TItem extends Identifiable>({
         });
     };
 
-    return { add, fetch, list };
+    return { add, remove, fetch, list };
 };
