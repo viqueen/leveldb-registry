@@ -11,4 +11,5 @@ export interface Registry<TItem extends Identifiable> {
     remove: (id: string) => Promise<TItem | undefined>;
     fetch: (id: string) => Promise<TItem | undefined>;
     list: (filter?: Filter<TItem>) => Promise<TItem[]>;
+    ids: () => Promise<string[]>;
 }

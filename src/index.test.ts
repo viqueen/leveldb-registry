@@ -35,6 +35,9 @@ describe('leveldb-registry', () => {
         const items = await registry.list();
         expect(items).toEqual([item]);
 
+        const ids = await registry.ids();
+        expect(ids).toEqual([item.id]);
+
         const removed = await registry.remove(item.id);
         expect(removed).toBeDefined();
         expect(removed).toEqual(item);

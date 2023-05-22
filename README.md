@@ -31,5 +31,8 @@ const registry = leveldbRegistry<User>({
 });
 
 const user = await registry.add({ id: randomUUID(), name: "haz" });
-return await registry.fetch(user.id);
+const found = await registry.fetch(user.id);
+
+const users = await registry.list();
+const userIds = await registry.ids();
 ```

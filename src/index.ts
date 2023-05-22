@@ -70,5 +70,20 @@ export const leveldbRegistry = <TItem extends Identifiable>({
         });
     };
 
-    return { add, remove, fetch, list };
+    const ids = async (): Promise<string[]> => {
+        return withLeveldb<string[]>((r) => {
+            return new Promise<string[]>((resolve, reject) => {
+                const keys: string[] = [];
+                r.createKeyStream()
+                    .on('data', (key: Buffer) => {
+                        keys.push(key.toString());
+                    })
+                    .on('close', () => resolve(keys))
+                    .on('end', () => resolve(keys))
+                    .on('error', () => reject());
+            });
+        });
+    };
+
+    return { add, remove, fetch, list, ids };
 };
