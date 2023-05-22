@@ -10,11 +10,11 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: 18
-      - run: npm ci
-      - run: npm run format:check
-      - run: npm run lint
-      - run: npm run test
-      - run: npm run build
+      - run: yarn
+      - run: yarn format:check
+      - run: yarn lint
+      - run: yarn test
+      - run: yarn build
       - name: SonarCloud Scan
         uses: SonarSource/sonarcloud-github-action@master
         env:

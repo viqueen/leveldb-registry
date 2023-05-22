@@ -13,7 +13,7 @@ brew install nvm
 ```bash
 cd leveldb-registry
 nvm install
-npm install
+yarn
 ```
 
 - setup git hooks
@@ -25,5 +25,5 @@ npx husky install
 - build it in watch mode
 
 ```bash
-npm run build:watch
+yarn build --watch
 ```
