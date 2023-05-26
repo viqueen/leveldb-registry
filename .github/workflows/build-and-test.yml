@@ -1,4 +1,4 @@
-name: leveldb-registry Test
+name: "@labset/leveldb-registry Build and Test"
 
 on: [push]
 
